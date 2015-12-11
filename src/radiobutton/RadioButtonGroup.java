@@ -21,7 +21,8 @@ public class RadioButtonGroup {
      *   The initial button number is invalid.
      */
     public RadioButtonGroup(int numButtons, int initial) {
-        // TODO: Implement this method.
+        this.numButtons = numButtons;
+        select(initial);
     }
 
     /**
@@ -39,7 +40,8 @@ public class RadioButtonGroup {
      *   The button number is invalid.
      */
     public void select(int button) {
-        // TODO: Implement this method.
+        checkButtonNumber(button);
+        selectedButton = button;
     }
 
     /**
@@ -50,10 +52,19 @@ public class RadioButtonGroup {
      *   The button number is invalid.
      */
     public boolean isSelected(int button) {
-        // TODO: Implement this method.
-        return false;
+        checkButtonNumber(button);
+        return button == selectedButton;
     }
 
-    // TODO: Add attributes and helper methods as needed.
+    /**
+     * Helper function that throws 'RuntimeException' if 'buttonNumber' is invalid.
+     */
+    private void checkButtonNumber(int buttonNumber) {
+        if (buttonNumber < 0 || buttonNumber >= numButtons)
+            throw new RuntimeException("invalid button number");
+    }
+
+    private final int numButtons;
+    private int selectedButton;
 
 }

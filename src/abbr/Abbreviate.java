@@ -2,6 +2,11 @@ package abbr;
 
 public class Abbreviate {
 
+    private static boolean isVowel(char c) {
+        c = Character.toUpperCase(c);
+        return c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U';
+    }
+
     /**
      * Abbreviates a string by removing all vowels.
      *
@@ -9,8 +14,13 @@ public class Abbreviate {
      * lower case, removed.  Other characters are unmodified.
      */
     public static String abbreviate(String string) {
-        // TODO: Write this method.
-        return null;
+        String result = "";
+        for (int i = 0; i < string.length(); ++i) {
+            final char c = string.charAt(i);
+            if (!isVowel(c))
+                result += c;
+        }
+        return result;
     }
 
     public static void main(String[] args) {

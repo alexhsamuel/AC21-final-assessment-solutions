@@ -28,7 +28,7 @@ public class Dealer {
      *   A list containing all cards, in a random order.
      */
     public static List<Card> getShuffledDeck() {
-        final List<Card> deck = new ArrayList<>();
+        final List<Card> deck = new ArrayList<Card>();
         // Add all cards to the deck, in order.
         for (Card.Suit suit : Card.Suit.values())
             for (Card.Number number : Card.Number.values())
@@ -50,15 +50,22 @@ public class Dealer {
      *   cards; the size of each hand is 'numCards'. No card is present more than once.
      */
     public static List<List<Card>> deal(int numPlayers, int numCards) {
-        // TODO: Finish this method as follows:
-        // - Get a shuffled deck of cards.
-        // - Create a list of hands.
-        // - For each hand,
-        //   - Create a list of cards.
-        //   - Add cards to the hand, removing them from the deck.
-        //   - Add the hand to the list of hands.
-        // - Return the list of hands.
-        return null;
+        // Get a deck.
+        final List<Card> deck = getShuffledDeck();
+
+        // Create the lists for hands.  Like an array of arrays, we must initialize the
+        // inner collections.
+        List<List<Card>> hands = new ArrayList<List<Card>>();
+        for (int h = 0; h < numPlayers; ++h)
+            hands.add(new ArrayList<Card>());
+
+        // This is not required by the problem, but we deal the cards "around the table"
+        // just as a real dealer would do.
+        for (int c = 0; c < numCards; ++c)
+            for (int h = 0; h < numPlayers; ++h)
+                hands.get(h).add(deck.remove(0));
+
+        return hands;
     }
 
     public static void main(String[] args) {
